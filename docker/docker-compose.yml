@@ -1,0 +1,93 @@
+version: '3.8'
+services:
+  jira:
+    build:
+      context: jira/
+    restart: always
+    container_name: devops-jira
+    user: jira
+    ports:
+      - 8080:8080
+      - 8081:8081
+    volumes:
+      - jira-data:/var/atlassian/application-data/jira
+      - ./certs/devops.jks:/var/atlassian/application-data/jira/devops.jks
+      - ./jira/config/server.xml:/opt/atlassian/jira/conf/server.xml
+      - ./jira/config/web.xml:/opt/atlassian/jira/conf/web.xml
+    networks:
+      - atlassian
+    hostname: 'jira.transfar.com'
+    extra_hosts:
+      - wiki.transfar.com:192.168.2.211
+    environment: 
+      - TZ=Asia/Shanghai
+    depends_on:
+      - database
+
+  confluence:
+    build:
+      context: confluence/
+    container_name: devops-confluence
+    restart: always
+    ports:
+      - 8090:8090
+      - 8443:8443
+    user: confluence
+    links:
+      - database
+    volumes:
+      - confluence-data:/var/atlassian/application-data/confluence
+      - ./certs/devops.jks:/var/atlassian/application-data/confluence/devops.jks
+      - ./confluence/config/server.xml:/opt/atlassian/confluence/conf/server.xml
+      - ./confluence/config/web.xml:/opt/atlassian/confluence/conf/web.xml
+      - ./confluence/config/web2.xml:/opt/atlassian/confluence/confluence/WEB-INF/web.xm
+    networks:
+      - atlassian
+    extra_hosts:
+      - jira.transfar.com:192.168.30.100
+    environment: 
+      - TZ=Asia/Shanghai
+    depends_on:
+      - database
+
+  database:
+    image: postgres:12.5
+    container_name: devops-postgres
+    restart: always
+    ports:
+      - 5432:5432
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment: 
+      - POSTGRES_USER=devops 
+      - POSTGRES_PASSWORD=verybigsecretrootpassword 
+      - POSTGRES_DB=wiki
+      - TZ=Asia/Shanghai
+    networks:
+      - atlassian
+
+  nginx:
+    image: nginx
+    restart: always
+    links:
+      - jira
+      - confluence
+    ports:
+      - 8080:80
+    volumes:
+      - ./:/src
+    command: ./src/scripts/run_nginx.sh
+    networks:
+      - atlassian 
+    environment:
+      #- DOMAIN
+      - TZ=Asia/Shanghai
+    
+volumes:
+  jira-data:
+  confluence-data:
+  db-data:
+
+networks:
+  atlassian:
+    driver: bridge
