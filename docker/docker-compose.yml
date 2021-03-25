@@ -66,22 +66,22 @@ services:
     networks:
       - atlassian
 
-  nginx:
-    image: nginx
-    restart: always
-    links:
-      - jira
-      - confluence
-    ports:
-      - 8080:80
-    volumes:
-      - ./:/src
-    command: ./src/scripts/run_nginx.sh
-    networks:
-      - atlassian 
-    environment:
-      #- DOMAIN
-      - TZ=Asia/Shanghai
+  # nginx:
+  #   image: nginx
+  #   restart: always
+  #   links:
+  #     - jira
+  #     - confluence
+  #   ports:
+  #     - 8080:80
+  #   volumes:
+  #     - ./:/src
+  #   command: ./src/scripts/run_nginx.sh
+  #   networks:
+  #     - atlassian 
+  #   environment:
+  #     #- DOMAIN
+  #     - TZ=Asia/Shanghai
     
 volumes:
   jira-data:
