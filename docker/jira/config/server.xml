@@ -39,7 +39,7 @@
               sslEnabledProtocols="TLSv1.2,TLSv1.3" 
               relaxedPathChars="[]|" relaxedQueryChars="[]|{}^&#x5c;&#x60;&quot;&lt;&gt;"
               clientAuth="false" useBodyEncodingForURI="true"
-              keystoreFile="/var/atlassian/application-data/jira/devops.jks" keystorePass="Transfar@123"
+              keystoreFile="/var/atlassian/application-data/jira/devops.jks" keystorePass="yuzhicloud"
               bindOnInit="false" connectionTimeout="20000" keystoreType="JKS"/>
 
     <Engine name="Catalina"

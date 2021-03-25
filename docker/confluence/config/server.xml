@@ -32,7 +32,7 @@
                disableUploadTimeout="true" />
     <Connector port="8443" protocol="org.apache.coyote.http11.Http11NioProtocol" SSLEnabled="true"
                maxThreads="200" scheme="https" secure="true"
-               keystoreFile="/var/atlassian/application-data/confluence/devops.jks" keystorePass="Transfar@123"
+               keystoreFile="/var/atlassian/application-data/confluence/devops.jks" keystorePass="yuzhicloud"
                clientAuth="false" sslProtocol="TLS" sslVerifyClient="optional"
 	        keystoreType="JKS"
 	       sslEnabledProtocols="TLSv1.3,TLSv1.2,TLSv1.1,SSLv2Hello"/>
