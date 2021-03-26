@@ -15,7 +15,7 @@ services:
       - ./jira/config/server.xml:/opt/atlassian/jira/conf/server.xml
       - ./jira/config/web.xml:/opt/atlassian/jira/conf/web.xml
     networks:
-      - atlassian
+      - devops
     hostname: 'jira.yuzhicloud.com'
     #extra_hosts:
     #  - wiki.transfar.com:192.168.2.211
@@ -42,7 +42,7 @@ services:
       - ./confluence/config/web.xml:/opt/atlassian/confluence/conf/web.xml
       - ./confluence/config/web2.xml:/opt/atlassian/confluence/confluence/WEB-INF/web.xm
     networks:
-      - atlassian
+      - devops
     #extra_hosts:
     #  - jira.transfar.com:192.168.30.100
     environment: 
@@ -64,7 +64,7 @@ services:
       - POSTGRES_DB=wiki
       - TZ=Asia/Shanghai
     networks:
-      - atlassian
+      - devops
 
   # nginx:
   #   image: nginx
