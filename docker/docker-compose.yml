@@ -5,7 +5,7 @@ services:
       context: jira/
     restart: always
     container_name: devops-jira
-    #user: jira
+    user: jira
     ports:
       - 8080:8080
       - 8081:8081
@@ -16,7 +16,7 @@ services:
       - ./jira/config/web.xml:/opt/atlassian/jira/conf/web.xml
     networks:
       - atlassian
-    #hostname: 'jira.transfar.com'
+    hostname: 'jira.yuzhicloud.com'
     #extra_hosts:
     #  - wiki.transfar.com:192.168.2.211
     environment: 
@@ -32,7 +32,7 @@ services:
     ports:
       - 8090:8090
       - 8443:8443
-    #user: confluence
+    user: confluence
     links:
       - database
     volumes:
@@ -89,5 +89,5 @@ volumes:
   db-data:
 
 networks:
-  atlassian:
+  devops:
     driver: bridge
