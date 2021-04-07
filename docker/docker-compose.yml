@@ -11,12 +11,12 @@ services:
       - 8081:8081
     volumes:
       - jira-data:/var/atlassian/application-data/jira
-      - ./certs/devops.jks:/var/atlassian/application-data/jira/devops.jks
-      - ./jira/config/server.xml:/opt/atlassian/jira/conf/server.xml
-      - ./jira/config/web.xml:/opt/atlassian/jira/conf/web.xml
+    #  - ./certs/devops.jks:/var/atlassian/application-data/jira/devops.jks
+    #  - ./jira/config/server.xml:/opt/atlassian/jira/conf/server.xml
+    #  - ./jira/config/web.xml:/opt/atlassian/jira/conf/web.xml
     networks:
       - devops
-    hostname: 'jira.yuzhicloud.com'
+    #hostname: 'jira.yuzhicloud.com'
     #extra_hosts:
     #  - wiki.transfar.com:192.168.2.211
     environment: 
@@ -37,10 +37,10 @@ services:
       - database
     volumes:
       - confluence-data:/var/atlassian/application-data/confluence
-      - ./certs/devops.jks:/var/atlassian/application-data/confluence/devops.jks
-      - ./confluence/config/server.xml:/opt/atlassian/confluence/conf/server.xml
-      - ./confluence/config/web.xml:/opt/atlassian/confluence/conf/web.xml
-      - ./confluence/config/web2.xml:/opt/atlassian/confluence/confluence/WEB-INF/web.xm
+    #  - ./certs/devops.jks:/var/atlassian/application-data/confluence/devops.jks
+    #  - ./confluence/config/server.xml:/opt/atlassian/confluence/conf/server.xml
+    #  - ./confluence/config/web.xml:/opt/atlassian/confluence/conf/web.xml
+    #  - ./confluence/config/web2.xml:/opt/atlassian/confluence/confluence/WEB-INF/web.xm
     networks:
       - devops
     #extra_hosts:
@@ -66,22 +66,22 @@ services:
     networks:
       - devops
 
-  # nginx:
-  #   image: nginx
-  #   restart: always
-  #   links:
-  #     - jira
-  #     - confluence
-  #   ports:
-  #     - 8080:80
-  #   volumes:
-  #     - ./:/src
-  #   command: ./src/scripts/run_nginx.sh
-  #   networks:
-  #     - atlassian 
-  #   environment:
-  #     #- DOMAIN
-  #     - TZ=Asia/Shanghai
+   nginx:
+     image: nginx
+     restart: always
+     links:
+       - jira
+       - confluence
+     ports:
+       - 8080:80
+     volumes:
+       - ./:/src
+     command: ./src/scripts/run_nginx.sh
+     networks:
+       - atlassian 
+     environment:
+       - DOMAIN
+         - TZ=Asia/Shanghai
     
 volumes:
   jira-data:
