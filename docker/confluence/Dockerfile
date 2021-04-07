@@ -1,4 +1,4 @@
-FROM atlassian/confluence-server:7.10.1-jdk11
+FROM atlassian/confluence-server:7.11.2-jdk11
 #USER root
 
 COPY "atlassian-agent.jar" /opt/atlassian/confluence/
