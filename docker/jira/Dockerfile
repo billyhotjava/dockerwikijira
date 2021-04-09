@@ -1,4 +1,4 @@
-FROM atlassian/jira-software:8.16-jdk11
+FROM atlassian/jira-software:8.16.0-jdk11
 #USER root
 
 COPY "atlassian-agent.jar" /opt/atlassian/jira/
